@@ -74,7 +74,7 @@ private double setTailLength() {
 }
 
 public String toString(){
-    String string = "Name: " + this.name + "\nBreed: " + this.breed + "\nAge: " + this.age + "\nWeight: " + this. weight + "\ntailLength: " + (float)this.tailLength;
+    String string = "owner: " + this.owner + "\nName: " + this.name + "\nBreed: " + this.breed + "\nAge: " + this.age + "\nWeight: " + this. weight + "\ntailLength: " + (float)this.tailLength;
     return string;
 
 }
@@ -97,6 +97,7 @@ public void updateAge (int years){
 
 public boolean setOwner(Owner newOwner){
     if(newOwner == null){
+        this.owner.removeDog(this);
         this.owner = null;
         return false;
     }

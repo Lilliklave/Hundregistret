@@ -11,7 +11,7 @@ private int size;
 
 
 public OwnerCollection (){
-    this.owners = new Owner[1];
+    this.owners = new Owner[0];
     this.size = 0;
 }
 
@@ -24,26 +24,31 @@ private void extendArraySize(){
 }
 
 
-// private void shrinkArraysize(){
-//     Owner[] newOwners = new Owner[owners.length - 1];
-//     for (int i = 0; i < newOwners.length; i++) { 
-//         newOwners[i] = owners[i];
-//     }
-//     owners = newOwners;
-// }
+private void shrinkArraySize(){
+    Owner[] newOwners = new Owner[owners.length - 1];
+    int x = 0;
+    for (int i = 0; i < owners.length; i++) {
+        if (owners[i] != null) {
+        newOwners[x] = owners[i];
+        x += 1;
+        }
+    }
+    owners = newOwners;
+}
 
 
 public boolean addOwner(Owner owner){
     if(this.containsOwner(owner)){
         return false;
     }
-if(this.size == owners.length){         // kolla om arrayen är full, isåfall öka arrayens storlek
-    extendArraySize();
 
-}
-owners[size++] = owner;                 // lägger till ny ägare på rätt plats och size pekar alltid på nästa lediga plats
-return true;
-
+    if(this.size == owners.length){         // kolla om arrayen är full, isåfall öka arrayens storlek
+        this.extendArraySize();
+    }
+    
+    owners[size] = owner;                 // lägger till ny ägare på rätt plats och size pekar alltid på nästa lediga plats
+    size += 1;
+    return true;
 }
 
 
@@ -62,6 +67,7 @@ public boolean removeOwner(String ownerName){    //ifall namn matchar -> ta bort
         for(int i = 0; i < owners.length;  i++){
             if(owners[i].equals(ownerObject)){
                 owners[i] = null;
+                this.shrinkArraySize();
                 return true;
             }
         }  
@@ -80,6 +86,7 @@ public boolean removeOwner(Owner ownerObject){    // samma som innan endast att 
         for(int i = 0; i < owners.length;  i++){
             if(owners[i].equals(ownerObject)){
                 owners[i] = null;
+                this.shrinkArraySize();
                 return true;
             }
         }  
@@ -92,14 +99,10 @@ public boolean removeOwner(Owner ownerObject){    // samma som innan endast att 
 
 public boolean containsOwner(String name){
     return getOwner(name) != null;
-
-
-
 }
 
 public boolean containsOwner(Owner owner){
     return this.getOwner(owner.getName()) != null;
-    
 }
 
 // Går igenom owners-arrayen och jämför de anginva namnet med ägarnas namn och ifall det matchar ett ägarnamn i listan så returnerar det den  motsvarande Owner-instansen annars returnerar den null.

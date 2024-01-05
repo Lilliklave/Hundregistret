@@ -8,9 +8,9 @@ public class DogCollection {
     private ArrayList<Dog> doglist = new ArrayList<>();
     
     public boolean addDog(Dog dog){
-        if(!containsDog(dog.getName())){
-        doglist.add(dog);
-        return true;    
+        if(!this.containsDog(dog.getName())){
+            doglist.add(dog);
+            return true;    
         }
         return false;
         
@@ -20,16 +20,22 @@ public class DogCollection {
 
     public boolean removeDog(String name){
         Dog removeDog = this.getDog(name);
+
+        if (removeDog == null){
+            return false;
+        }
+
         if(removeDog != null && removeDog.getOwner() == null){
             doglist.remove(removeDog);
             return true;
-        }else{
-            return false;
         }
+            return false;
+        
     }
 
     public boolean removeDog(Dog dog){
-        if(dog != null && doglist.contains(dog) && dog.getOwner()== null){
+        // om hund existerar och collection innehåller hund och hunden inte har en ägare
+        if(dog != null && doglist.contains(dog) && dog.getOwner() == null){
             doglist.remove(dog);
             return true;
         }else{
@@ -40,22 +46,17 @@ public class DogCollection {
 
 
     public boolean containsDog(String name){
-        
-            if(this.getDog(name) != null){
-                return true;
-            }
-            
-        
-            return false;
+        if(this.getDog(name) != null){
+            return true;
+        }
+        return false;
     }
 
     public boolean containsDog(Dog dogObject){
         if(this.getDog(dogObject.getName()) != null){
-                return true;
-            }
-            
-        
-            return false;
+            return true;
+        }
+        return false;
     }
 
     public Dog getDog (String name){
