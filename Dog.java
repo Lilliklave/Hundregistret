@@ -2,7 +2,7 @@
 
 public class Dog {
     
-    private static final double TAX_LENGTH = 3.7;
+    private static final double DACHSHUND_LENGTH = 3.7;
 
     private String name;
     private String breed;
@@ -43,7 +43,7 @@ public class Dog {
         return input;
     }
 
-    public String getName(){
+public String getName(){
     return this.name;
 
 }
@@ -66,7 +66,7 @@ public double getTailLength(){
 
 private double setTailLength() {
      if(this.breed.equalsIgnoreCase("tax")|| this.breed.equalsIgnoreCase("dachshund") || this.breed.equalsIgnoreCase("mäyräkoira") || this.breed.equalsIgnoreCase("teckel")){
-        return TAX_LENGTH;
+        return DACHSHUND_LENGTH;
 
     }else{
         return this.age * (this.weight/10.0);
@@ -96,19 +96,20 @@ public void updateAge (int years){
 }
 
 public boolean setOwner(Owner newOwner){
-    if(newOwner == null){
-        this.owner.removeDog(this);
+    if(newOwner == null){       // om parametern är null, ta bort hunden från ägaren och ta bort ägaren från den här hunden
+        if(this.owner != null){ 
+        this.owner.removeDog(this);     //om hunden har en ägare -> kör denna kod, annars hade det krashat.
+        }
         this.owner = null;
         return false;
     }
-    if(this.owner == null){
+    if(this.owner == null){  // om den här hunden inte har en ägare, så sätts en ägare
         this.owner = newOwner;
         newOwner.addDog(this);
     }
     return true;
 
 }
-
 
 
 

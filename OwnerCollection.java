@@ -34,6 +34,7 @@ private void shrinkArraySize(){
         }
     }
     owners = newOwners;
+    size--;
 }
 
 
@@ -76,15 +77,15 @@ public boolean removeOwner(String ownerName){    //ifall namn matchar -> ta bort
    
 }
 
-public boolean removeOwner(Owner ownerObject){    // samma som innan endast att den kollar ifall owner objektet existerar med equalsmetoden
+public boolean removeOwner(Owner owner){    // samma som innan endast att den kollar ifall owner objektet existerar med equalsmetoden
     
-    if(ownerObject.getDogs().size() > 0){
+    if(owner.getDogs().size() > 0){
         return false;
     }
     
-    if(this.containsOwner(ownerObject)){
+    if(this.containsOwner(owner)){
         for(int i = 0; i < owners.length;  i++){
-            if(owners[i].equals(ownerObject)){
+            if(owners[i].equals(owner)){
                 owners[i] = null;
                 this.shrinkArraySize();
                 return true;
@@ -116,7 +117,7 @@ public Owner getOwner(String name){
 
 }
 
-//Skapar en ArrayList av arrayen med hjälp av Arrays-metoden "asList".
+
 public ArrayList<Owner> getOwners(){
     ArrayList<Owner> ownerList = new ArrayList<>();
     Arrays.sort(owners);

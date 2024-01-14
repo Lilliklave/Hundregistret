@@ -1,0 +1,26 @@
+import java.util.*;
+
+public class TopThreeList {
+
+    private ArrayList<Score> scoreBoard;
+
+    public TopThreeList() {
+        this.scoreBoard = new ArrayList<Score>();
+    }
+
+    public void addScore(Score s) { 
+        
+            scoreBoard.add(s);
+            scoreBoard.sort((score1, score2) -> Integer.compare(score2.getScore(), score1.getScore())); 
+        
+
+        if (scoreBoard.size() > 3) {
+            scoreBoard.remove(scoreBoard.size() - 1); 
+        }
+    }
+
+    public Score[] getScores() { 
+        Score[] sortedScores = new Score[scoreBoard.size()];
+        return scoreBoard.toArray(sortedScores);
+    }
+}

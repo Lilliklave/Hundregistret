@@ -16,31 +16,24 @@ public class DogCollection {
         
     }
 
-    //Tar bort en hund fr˚an samlingen om denna existerar. Returnerar om hunden togs bort eller inte.
+    //Tar bort en hund från samlingen om denna existerar. Returnerar om hunden togs bort eller inte.
 
     public boolean removeDog(String name){
-        Dog removeDog = this.getDog(name);
-
-        if (removeDog == null){
+        Dog dogForRemoval = this.getDog(name);
+        if (dogForRemoval == null || dogForRemoval.getOwner() != null) {
             return false;
-        }
-
-        if(removeDog != null && removeDog.getOwner() == null){
-            doglist.remove(removeDog);
-            return true;
-        }
-            return false;
-        
     }
+        doglist.remove(dogForRemoval);
+        return true;
+    }
+    
 
     public boolean removeDog(Dog dog){
-        // om hund existerar och collection innehåller hund och hunden inte har en ägare
-        if(dog != null && doglist.contains(dog) && dog.getOwner() == null){
-            doglist.remove(dog);
-            return true;
-        }else{
+        if (dog == null || !doglist.contains(dog) || dog.getOwner() != null) {
             return false;
         }
+        doglist.remove(dog);
+        return true;
     }
 
 
@@ -52,8 +45,8 @@ public class DogCollection {
         return false;
     }
 
-    public boolean containsDog(Dog dogObject){
-        if(this.getDog(dogObject.getName()) != null){
+    public boolean containsDog(Dog dog){
+        if(this.getDog(dog.getName()) != null){
             return true;
         }
         return false;

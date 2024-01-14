@@ -32,16 +32,16 @@ public class Owner implements Comparable<Owner> {
         return this.name;
     }
 
-    // fixa sen med egen kod
+   
     private String dogsToString() {
-        String[] dogsArray = new String[dogs.size()];
+        String[] arrayOfDogs = new String[dogs.size()];
         for (int i = 0; i < dogs.size(); i++) {
-            dogsArray[i] = dogs.get(i).getName();
+            arrayOfDogs[i] = dogs.get(i).getName();
         }
-        String result = String.join("\n", dogsArray);
-        return result;
+        String endResult = String.join("\n", arrayOfDogs);
+        return endResult;
     }
-
+    
     public String toString() {
         String s = "Owner: " + this.name + "\nDogs: " + "\n" + dogsToString();
         return s;

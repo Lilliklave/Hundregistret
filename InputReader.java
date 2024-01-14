@@ -1,47 +1,46 @@
-// 
+// Liliana Klavebäck Martinez likl4662@SU.SE
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.InputStream;
 
-public class HandleUserInput {
+public class InputReader {
     private static final String END_OF_TEXT = "?> ";
 
     private static ArrayList<InputStream> inputStreamList = new ArrayList<>();
     private Scanner scanner;
 
-    public HandleUserInput() {
+    public InputReader() {
         this(System.in);
     }
 
-    public HandleUserInput(InputStream inputStream) {
+    public InputReader(InputStream inputStream) {
         if (inputStreamList.contains(inputStream))
             throw new IllegalStateException("Error: Stream already in use!");
         inputStreamList.add(inputStream);
         this.scanner = new Scanner(inputStream);
     }
 
-    public String readText(String userInput) {
+    public String handleText(String userInput) {
         System.out.print(userInput + END_OF_TEXT);
-        String input = formatString(scanner.nextLine().trim());
+        String input = scanner.nextLine().trim();
         return input;
     }
 
-    public int readInteger(String userInput) {
+    public int handleInteger(String userInput) {
         System.out.print(userInput + END_OF_TEXT);
         int input = scanner.nextInt();
         scanner.nextLine();
         return input;
     }
 
-    public double readDouble(String userInput) {
+    public double handleDouble(String userInput) {
         System.out.print(userInput + END_OF_TEXT);
         double input = scanner.nextDouble();
         scanner.nextLine();
         return input;
     }
 
-    private String formatString(String string) {
-        return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
-    }
+    
 }
+
